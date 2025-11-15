@@ -10,7 +10,7 @@ export default (element) => {
 
   console.log("Recherche des infos pour invite_id:", inviteId);
 
-  // 2. Appel de ton API Google Apps Script
+  // 2. Appel API Google Apps Script
   fetch(
     "https://script.google.com/macros/s/AKfycbzL2OdNkqbnc71lzQHHXhTt9zfqfrAWVrdf1tO-lj4Rv0g-yk3sdzgcovnRhAdi8Nj0Sw/exec?id=" +
       inviteId
@@ -22,16 +22,21 @@ export default (element) => {
         return;
       }
 
+      // 3. Nombre total d'invités
       const nbPersonnes = data.length;
+
+      // 4. Liste noms
       const noms = data.map((p) => p.nom_personne);
 
+      // 5. Affichage console EXACTEMENT comme avant
       console.log("➡️ invite_id:", inviteId);
       console.log("➡️ Nombre de personnes:", nbPersonnes);
       console.log("➡️ Noms des invités:", noms);
 
+      // 6. (Optionnel) injection dans element
       if (element) {
         element.innerHTML = `
-          <div style="padding:10px;background:#f4f4f4">
+          <div style="padding:6px;background:#eee;border-radius:4px;margin:4px 0;">
             <strong>ID :</strong> ${inviteId}<br>
             <strong>Personnes :</strong> ${nbPersonnes}<br>
             <strong>Noms :</strong> ${noms.join(", ")}
